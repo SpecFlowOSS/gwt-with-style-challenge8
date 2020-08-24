@@ -6,21 +6,11 @@ namespace Specs.Support
     [Binding]
     public class TemplateArgumentsTransformation
     {
-        [StepArgumentTransformation]
-        public string HandleTemplateArguments(string arg)
+        [StepArgumentTransformation(@"^\{(.*)\}$")]
+        public string HandleTemplateArguments(string placeholderName)
         {
-            var value = arg;
+            return Environment.GetEnvironmentVariable(placeholderName) ?? $"{{{placeholderName}}}";
 
-            if (arg.StartsWith("{") && arg.EndsWith("}"))
-            {
-                var variableName = arg.Trim('{', '}');
-                var variableValue = Environment.GetEnvironmentVariable(variableName);
-
-                if (variableValue != null)
-                    value = variableValue;
-            }
-
-            return value;
         }
     }
 }
