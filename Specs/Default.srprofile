@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestProfile xmlns="http://www.specflow.org/schemas/plus/TestProfile/1.5">
+	<Settings projectName="Specs" />
+	<Execution stopAfterFailures="3" testThreadCount="1" testSchedulingMode="Sequential" />
+
+	<TestAssemblyPaths>
+		<TestAssemblyPath>Specs.dll</TestAssemblyPath>
+	</TestAssemblyPaths>
+	<Targets>
+		<Target name="Default">
+			<Filter>!@CurrencyTemplate</Filter>
+		</Target>
+		<Target name="EUR">
+			<Filter>@CurrencyTemplate</Filter>
+			<DeploymentTransformationSteps>
+				<EnvironmentVariable variable="Test_Currency" value="EUR" />
+			</DeploymentTransformationSteps>
+		</Target>
+		<Target name="USD">
+			<Filter>@CurrencyTemplate</Filter>
+			<DeploymentTransformationSteps>
+				<EnvironmentVariable variable="Test_Currency" value="USD" />
+			</DeploymentTransformationSteps>
+		</Target>
+	</Targets>
+</TestProfile>
